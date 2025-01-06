@@ -24,6 +24,16 @@ describe('UserController', () => {
         expect(mockResponse.state.json).toMatchObject({ message: 'Usuário criado' })
     });
 
+    it('Deve retornar todos os usuários', () => {
+        const mockTrackController = jest.spyOn(userController, 'getAllUsers');
+        const mockRequest = {} as Request;
+        const mockResponse = makeMockResponse();
+
+        userController.getAllUsers(mockRequest, mockResponse);
+        
+        expect(mockTrackController).toHaveBeenCalled();
+    });
+
     it('Não deve adicionar um novo usuário com o nome em branco', () => {
         const mockRequest = {
             body: {
@@ -35,16 +45,18 @@ describe('UserController', () => {
         userController.createUser(mockRequest, mockResponse);
         expect(mockResponse.state.status).toBe(400);
         expect(mockResponse.state.json).toMatchObject({ message: 'Bad request! Name obrigatório'});
-        console.log("Sucesso");
     });
 
-    it('Deve retornar todos os usuários', () => {
-        const mockTrackController = jest.spyOn(userController, 'getAllUsers');
-        const mockRequest = {} as Request;
+    it('Não deve adicionar um novo usuário com o email em branco', () => {
+        const mockRequest = {
+            body: {
+                name: 'Vitor',
+                email: ''
+            } 
+        } as Request
         const mockResponse = makeMockResponse();
-
-        userController.getAllUsers(mockRequest, mockResponse);
-        
-        expect(mockTrackController).toHaveBeenCalled();
-    });
-})
+        userController.createUser(mockRequest, mockResponse);
+        expect(mockResponse.state.status).toBe(400);
+        expect(mockResponse.state.json).toMatchObject({ message: 'Bad request! Email obrigatório'});
+    });  
+});
