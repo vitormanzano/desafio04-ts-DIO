@@ -50,10 +50,10 @@ export class UserService {
         if (indexUser === -1 ) {
             console.log('Usuário não encontrado!');
             return false;
-        }
+        };
         this.db.splice(indexUser, 1);
         console.log('Usuário deletado!');
         return true;
-    }
-}
+    };
+};
 
