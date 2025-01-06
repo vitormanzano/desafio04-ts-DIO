@@ -7,15 +7,25 @@ const db = [
     {
         name: "Joana",
         email: "joana@dio.com",
+    },
+    {
+        name: "Vitor",
+        email: "vitor@dio.com"
+    },
+    {
+        name: "Dani",
+        email: "dani@dio.com"
+    },
+    {
+        name: "Reginaldo",
+        email: "reginaldo@dio.com"
     }
 ]
 
 export class UserService {
     db: User[]
 
-    constructor(
-        database = db
-    ){
+    constructor(database = db){
         this.db = database
     }
 
@@ -31,6 +41,19 @@ export class UserService {
 
     getAllUsers = () => {
         return this.db
+    }
+
+    deleteUser = (email: string) => {
+        
+        const indexUser = this.db.findIndex(user => user.email === email);
+
+        if (indexUser === -1 ) {
+            console.log('Usuário não encontrado!');
+            return false;
+        }
+        this.db.splice(indexUser, 1);
+        console.log('Usuário deletado!');
+        return true;
     }
 }
 
