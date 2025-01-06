@@ -36,8 +36,5 @@ describe('UserService', () => {
         const mockConsole = jest.spyOn(global.console, 'log');
         userService.deleteUser('vitor@gmail.com');
         expect(mockConsole).toHaveBeenCalledWith('Usuário não encontrado!');
-    })
-
-
-
-})
+    });
+});
