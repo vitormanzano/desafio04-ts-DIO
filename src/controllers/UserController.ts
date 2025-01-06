@@ -22,7 +22,7 @@ export class UserController {
     }
 
     getAllUsers = (request: Request, response: Response) => {
-        const users = this.userService.getAllUsers()
+        const users = this.userService.getAllUsers();
         return response.status(200).json( users )
     } 
 }
