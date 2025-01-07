@@ -31,11 +31,17 @@ export class UserController {
     }
 
     deleteUser = (request: Request, response: Response) => {
-        const isDeleted = this.userService.deleteUser('vitor@dio.com');
-        
-        if (isDeleted) {
-            return response.status(200).json({ message: 'Usuário deletado com sucesso!'});
+        const email = request.body;        
+
+        if ( Object.keys(email).length === 0 ) {
+            return response.status(400).json({ message: 'Bad request! Email obrigatório'});
         }
-        return response.status(400).json({ message: 'Não conseguimos deletar o usuário!'});
+        
+        this.userService.deleteUser(email);
+
+        return response.status(200).json({ message: 'Usuário deletado com sucesso!'});
+
+        
+     
     };
 };

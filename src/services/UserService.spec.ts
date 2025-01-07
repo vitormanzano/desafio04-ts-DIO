@@ -21,17 +21,18 @@ describe('UserService', () => {
     ]
     const userService = new UserService(mockDb);
 
-    // it('Deve adicionar um novo usuário', () => {
-    //     const mockConsole = jest.spyOn(global.console, 'log')
-    //     userService.createUser('nath', 'nath@test.com');
-    //     expect(mockConsole).toHaveBeenCalledWith('DB atualizado', mockDb)
-    // });
+    it('Deve adicionar um novo usuário', () => {
+        const mockConsole = jest.spyOn(global.console, 'log')
+        userService.createUser('nath', 'nath@test.com');
+        expect(mockConsole).toHaveBeenCalledWith('DB atualizado', mockDb)
+    });
 
     it('Deve deletar um usuário', () => {
         const mockConsole = jest.spyOn(global.console, 'log');
         userService.deleteUser("vitor@dio.com");
         expect(mockConsole).toHaveBeenCalledWith('Usuário deletado!');
     });
+
     it('Não deve deletar um usuário se não encontrar', () => {
         const mockConsole = jest.spyOn(global.console, 'log');
         userService.deleteUser('vitor@gmail.com');
